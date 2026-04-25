@@ -27,7 +27,14 @@ async function ensureStore() {
 export async function readStore(): Promise<MailStore> {
   await ensureStore();
   const raw = await fs.readFile(storePath, "utf8");
-  return JSON.parse(raw) as MailStore;
+  if (!raw.trim()) {
+    return { accounts: [], messages: [] };
+  }
+  try {
+    return JSON.parse(raw) as MailStore;
+  } catch {
+    return { accounts: [], messages: [] };
+  }
 }
 
 export async function writeStore(store: MailStore) {
