@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(curl -s \"http://127.0.0.1:3000/api/accounts\" -H 'X-ADMIN-TOKEN: change-me')",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(f'Accounts: {len\\(d[\\\\\"accounts\\\\\"]\\)}'\\)\")",
+      "Bash(curl -s -w \"\\\\nHTTP_STATUS: %{http_code}\" \"http://127.0.0.1:3000/api/accounts\" -H 'X-ADMIN-TOKEN: change-me')"
     ]
   }
 }
