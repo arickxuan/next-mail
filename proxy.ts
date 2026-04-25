@@ -2,8 +2,9 @@ import { NextResponse, type NextRequest } from "next/server";
 
 const ADMIN_TOKEN_HEADER = "X-ADMIN-TOKEN";
 
-export function proxy(request: NextRequest) {
-  const expectedToken = process.env["X-ADMIN-TOKEN"] || process.env.X_ADMIN_TOKEN;
+export default function middleware(request: NextRequest) {
+  const expectedToken =
+    process.env["X-ADMIN-TOKEN"] || process.env.X_ADMIN_TOKEN;
   const actualToken = request.headers.get(ADMIN_TOKEN_HEADER);
 
   if (!expectedToken) {
@@ -18,5 +19,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/api/:path*"]
+  matcher: ["/api/:path*"],
 };
